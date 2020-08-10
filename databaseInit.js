@@ -1,7 +1,14 @@
 const admin = require('firebase-admin')
 const firebase = require('firebase')
 const path = require('path')
-require('dotenv').config({ path: path.resolve(process.cwd(), '.env.prod') })
+
+const environment = 'PROD'
+const environmentMap = {
+  PROD: '.env.prod',
+  STAGING: '.env.staging',
+  BACKUPTEST: '.env.backuptest'
+}
+require('dotenv').config({ path: path.resolve(process.cwd(), environmentMap[environment]) })
 
 const firebaseAppConfig = {
   credential: admin.credential.cert({
